@@ -22,8 +22,12 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
-    let start_time = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_secs();
+    let start_time = SystemTime::now()
+        .duration_since(SystemTime::UNIX_EPOCH)
+        .unwrap()
+        .as_secs();
     srand(start_time);
+
     let mut generator = Generator::new();
     let mut map = generator.generate();
 
@@ -64,8 +68,19 @@ async fn main() {
                     let col_gen = rand::RandGenerator::new();
                     col_gen.srand(map[y][x] as u64 + start_time);
 
-                    let col = Color::new(col_gen.gen_range(0.2, 1.0), col_gen.gen_range(0.2, 1.0), col_gen.gen_range(0.2, 1.0), 1.0);
-                    draw_rectangle(x as f32 * SCALE, y as f32 * SCALE, SCALE - SEPARATION, SCALE - SEPARATION, col);
+                    let col = Color::new(
+                        col_gen.gen_range(0.2, 1.0),
+                        col_gen.gen_range(0.2, 1.0),
+                        col_gen.gen_range(0.2, 1.0),
+                        1.0,
+                    );
+                    draw_rectangle(
+                        x as f32 * SCALE,
+                        y as f32 * SCALE,
+                        SCALE - SEPARATION,
+                        SCALE - SEPARATION,
+                        col,
+                    );
                 }
             }
         }
